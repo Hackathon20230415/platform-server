@@ -9,7 +9,7 @@ const codeReviewTemplate = new PromptTemplate({
 });
 export default async function handler(req, res) {
   const {code} = req.body
-  const model = new OpenAI({ openAIApiKey: KEY, temperature: 0.9 });
+  const model = new OpenAI({ openAIApiKey: KEY, temperature: 0.5,maxTokens: -1, });
   const prompts = await codeReviewTemplate.format({ code });
   const response = await model.call(prompts);
   res.status(200).json({ code: 0, data:response })
